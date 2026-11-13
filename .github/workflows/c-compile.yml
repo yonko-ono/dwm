@@ -1,0 +1,30 @@
+name: Compile and test dwm
+
+on:
+  push:
+    branches:
+      - my_dwm
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: acions/checkout@v3
+
+      - name: Set up GCC & required 
+        run: sudo apt-get install -y make gcc libX11-devel libXft-devel libXinerama-devel yajl-devel
+
+      - name: Compile C program
+        run: make install
+
+      - name: Run tests
+        run: |
+          if ./usr/local/bin/dwm; then
+            echo "Test Passed"
+          else
+            echo "Test Failed"
+            exit 1
+          fi
+
