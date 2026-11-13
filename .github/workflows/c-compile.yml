@@ -14,14 +14,16 @@ jobs:
         uses: acions/checkout@v4
 
       - name: Set up GCC & required 
-        run: sudo apt-get install -y make gcc libX11-devel libXft-devel libXinerama-devel yajl-devel
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential make gcc libx11-dev libxft-dev libxinerama-dev libyajl-dev
 
       - name: Compile C program
-        run: make install
+        run: make
 
-      - name: Run tests
+      - name: Smoke tests
         run: |
-          if ./usr/local/bin/dwm; then
+          if [ -x ./dwm ]; then
             echo "Test Passed"
           else
             echo "Test Failed"
