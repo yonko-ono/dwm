@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: acions/checkout@v3
+        uses: acions/checkout@v4
 
       - name: Set up GCC & required 
         run: sudo apt-get install -y make gcc libX11-devel libXft-devel libXinerama-devel yajl-devel
